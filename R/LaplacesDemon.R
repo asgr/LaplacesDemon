@@ -2560,7 +2560,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
           wd <- getwd()
           clusterExport(cl, varlist=c("Packages", "Dyn.libs", "wd"),
                envir=environment())
-          model.wrapper <- function(x, ...)
+          model.wrapper <- function(prop_row)
                {
                if(!is.null(Packages)) {
                     sapply(Packages,
@@ -2571,11 +2571,12 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                          function(x) dyn.load(paste(wd, x, sep = "/")))
                     on.exit(sapply(Dyn.libs,
                          function(x) dyn.unload(paste(wd, x, sep = "/"))))}
-               Model(prop[x,], Data)
+               Model(prop_row, Data)
                }
           prop <- Z
           batch1 <- 1:(Nc/2)
           batch2 <- batch1 + (Nc/2)
+          z_vec <- numeric(Nc)
           for (iter in 1:Iterations) {
                ### Print Status
                if(iter %% Status == 0)
@@ -2589,17 +2590,19 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                     Mon[t.iter,] <- Mo0[[1]][["Monitor"]]}
                for (i in 1:Nc) {
                     ### Propose new parameter values with stretch move
-                    z <- 1 / sqrt(runif(1, 1 / beta, beta))
+                    z_vec[i] <- 1 / sqrt(runif(1, 1 / beta, beta))
                     if(i <= (Nc/2)) s <- sample(batch2, 1)
                     else s <- sample(batch1, 1)
                     prop[i,] <- Mo0[[s]][["parm"]] +
-                         z*(Mo0[[i]][["parm"]] - Mo0[[s]][["parm"]])
+                         z_vec[i]*(Mo0[[i]][["parm"]] - Mo0[[s]][["parm"]])
                     if(i == 1 & iter %% Status == 0) 
                          cat(",   Proposal: Multivariate\n", file=LogFile,
                               append=TRUE)}
                ### Log-Posterior of the proposed state
-               Mo1 <- clusterApply(cl, 1:Nc, model.wrapper,
-                    Model, Data, prop)
+               ### Pass each proposal row directly so workers use the
+               ### current proposals rather than a stale exported copy.
+               Mo1 <- clusterApply(cl, lapply(seq_len(Nc),
+                    function(i) prop[i,]), model.wrapper)
                for (i in 1:Nc) {
                     if(any(!is.finite(c(Mo1[[i]][["LP"]],
                          Mo1[[i]][["Dev"]], Mo1[[i]][["Monitor"]])))) {
@@ -2614,7 +2617,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                          Mo1[[i]] <- Mo0[[i]]}
                     ### Accept/Reject
                     log.u <- log(runif(1))
-                    log.alpha <- (LIV-1)*log(z) + Mo1[[i]][["LP"]] -
+                    log.alpha <- (LIV-1)*log(z_vec[i]) + Mo1[[i]][["LP"]] -
                          Mo0[[i]][["LP"]]
                     if(!is.finite(log.alpha)) log.alpha <- 0
                     else if(log.u < log.alpha) {
