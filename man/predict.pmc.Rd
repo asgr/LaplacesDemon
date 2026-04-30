@@ -8,7 +8,7 @@
   \eqn{\textbf{y}^{rep}}{y[rep]}), and then perform posterior
   predictive checks. Either \eqn{\textbf{y}^{new}}{y[new]} or
   \eqn{\textbf{y}^{rep}}{y[rep]} is predicted given an object of
-  class \code{demonoid}, the model specification, and data.
+  class \code{pmc}, the model specification, and data.
 }
 \usage{\method{predict}{pmc}(object, Model, Data, CPUs=1, Type=.parallel_type(), \dots)}
 \arguments{

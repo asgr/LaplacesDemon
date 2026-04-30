@@ -58,10 +58,13 @@ alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type=.parallel_type())
     and indicates the number of central processing units (CPUs) of the
     computer or cluster. For example, when a user has a quad-core
     computer, \code{CPUs=4}.}
-  \item{Type}{This argument defaults to \code{.parallel_type()} (\code{"FORK"} on macOS/Linux, \code{"PSOCK"} on Windows) and uses the
-    Simple Network of Workstations (SNOW) for parallelization.
-    Alternatively, \code{Type="MPI"} may be specified to use Message
-    Passing Interface (MPI) for parallelization.}
+  \item{Type}{This argument defaults to \code{.parallel_type()}, which
+    selects a platform-adaptive parallel backend: \code{"FORK"} on
+    macOS/Linux and \code{"PSOCK"} on Windows. Thus, the default uses
+    forked parallel processing on Unix-like systems and PSOCK/SNOW-style
+    socket clusters on Windows. Alternatively, \code{Type="MPI"} may be
+    specified to use Message Passing Interface (MPI) for
+    parallelization.}
 }
 \details{
   The \code{PMC} function uses the adaptive importance sampling

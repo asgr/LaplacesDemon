@@ -152,8 +152,10 @@ LaplacesDemon.hpc(Model, Data, Initial.Values, Covar=NULL,
     \code{LaplacesDemon.hpc}, and indicates the number of central
     processing units (CPUs) of the computer or cluster. For example,
     when a user has a quad-core computer, \code{CPUs=4}.}
-  \item{Type}{This argument defaults to \code{.parallel_type()} (\code{"FORK"} on macOS/Linux, \code{"PSOCK"} on Windows) and uses the
-    Simple Network of Workstations (SNOW) for parallelization.
+  \item{Type}{This argument defaults to \code{.parallel_type()}
+    (\code{"FORK"} on macOS/Linux, \code{"PSOCK"} on Windows). On
+    macOS/Linux, \code{"FORK"} uses fork-based local parallelization; on
+    Windows, \code{"PSOCK"} uses socket-based parallelization (SNOW/PSOCK).
     Alternatively, \code{Type="MPI"} may be specified to use Message
     Passing Interface (MPI) for parallelization.}
   \item{Packages}{This optional argument is for use with parallel

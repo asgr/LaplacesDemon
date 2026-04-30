@@ -2,9 +2,10 @@
 # .parallel_type                                                          #
 #                                                                         #
 # Returns the fastest cluster type for the current platform.             #
-# On Windows, PSOCK is the only option. On macOS and Linux, FORK is      #
-# faster because workers inherit the parent process via copy-on-write,   #
-# eliminating the need to re-export packages and large objects.          #
+# On Windows, this helper returns PSOCK because FORK is unavailable.     #
+# On macOS and Linux, FORK is faster because workers inherit the parent  #
+# process via copy-on-write, eliminating the need to re-export packages  #
+# and large objects.                                                      #
 ###########################################################################
 
 .parallel_type <- function() {
