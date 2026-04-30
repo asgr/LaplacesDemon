@@ -6,7 +6,7 @@
 # class demonoid.                                                         #
 ###########################################################################
 
-predict.demonoid <- function(object, Model, Data, CPUs=1, Type="PSOCK",
+predict.demonoid <- function(object, Model, Data, CPUs=1, Type=.parallel_type(),
      ...)
      {
      ### Initial Checks

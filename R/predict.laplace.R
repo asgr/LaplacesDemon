@@ -6,7 +6,7 @@
 # class laplace.                                                          #
 ###########################################################################
 
-predict.laplace <- function(object, Model, Data, CPUs=1, Type="PSOCK", ...)
+predict.laplace <- function(object, Model, Data, CPUs=1, Type=.parallel_type(), ...)
      {
      ### Initial Checks
      if(missing(object)) stop("The object argument is required.")

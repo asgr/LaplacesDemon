@@ -8,7 +8,7 @@
 
 LaplaceApproximation <- function(Model, parm, Data, Interval=1.0E-6,
      Iterations=100, Method="SPG", Samples=1000, CovEst="Hessian",
-     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type="PSOCK")
+     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type=.parallel_type())
      {
      ##########################  Initial Checks  ##########################
      time1 <- proc.time()

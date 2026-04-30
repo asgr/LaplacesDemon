@@ -2294,7 +2294,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                file=LogFile, append=TRUE)
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, .parallel_type())
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
           on.exit(stopCluster(cl))
@@ -2549,7 +2549,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                file=LogFile, append=TRUE)
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, .parallel_type())
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
           on.exit(stopCluster(cl))
@@ -3964,7 +3964,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                file=LogFile, append=TRUE)
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, .parallel_type())
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
           on.exit(stopCluster(cl))
@@ -5093,7 +5093,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
           file=LogFile, append=TRUE)
      cat("\n##################################################\n",
           file=LogFile, append=TRUE)
-     cl <- makeCluster(CPUs)
+     cl <- makeCluster(CPUs, .parallel_type())
      cat("\n##################################################\n",
           file=LogFile, append=TRUE)
      on.exit(stopCluster(cl))
@@ -5219,7 +5219,7 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                file=LogFile, append=TRUE)
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, .parallel_type())
           cat("\n##################################################\n",
                file=LogFile, append=TRUE)
           on.exit(stopCluster(cl))

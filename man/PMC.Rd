@@ -10,7 +10,7 @@
 }
 \usage{
 PMC(Model, Data, Initial.Values, Covar=NULL, Iterations=10, Thinning=1,
-alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type="PSOCK")
+alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This is a model specification function. For more
@@ -58,7 +58,7 @@ alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type="PSOCK")
     and indicates the number of central processing units (CPUs) of the
     computer or cluster. For example, when a user has a quad-core
     computer, \code{CPUs=4}.}
-  \item{Type}{This argument defaults to \code{"PSOCK"} and uses the
+  \item{Type}{This argument defaults to \code{.parallel_type()} (\code{"FORK"} on macOS/Linux, \code{"PSOCK"} on Windows) and uses the
     Simple Network of Workstations (SNOW) for parallelization.
     Alternatively, \code{Type="MPI"} may be specified to use Message
     Passing Interface (MPI) for parallelization.}

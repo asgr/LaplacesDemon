@@ -7,7 +7,7 @@
   proposal density.
 }
 \usage{
-SIR(Model, Data, mu, Sigma, n=1000, CPUs=1, Type="PSOCK")
+SIR(Model, Data, mu, Sigma, n=1000, CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This is a model specification function. For more
@@ -32,8 +32,9 @@ SIR(Model, Data, mu, Sigma, n=1000, CPUs=1, Type="PSOCK")
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{
   Sampling Importance Resampling (SIR) was introduced in Gordon, et

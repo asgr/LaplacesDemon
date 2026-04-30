@@ -7,7 +7,7 @@
 
 IterativeQuadrature <- function(Model, parm, Data, Covar=NULL,
      Iterations=100, Algorithm="CAGH", Specs=NULL, Samples=1000, sir=TRUE,
-     Stop.Tolerance=c(1e-5,1e-15), CPUs=1, Type="PSOCK")
+     Stop.Tolerance=c(1e-5,1e-15), CPUs=1, Type=.parallel_type())
      {
      cat("\nIterativeQuadrature was called on ", date(), "\n", sep="")
      time1 <- proc.time()
@@ -366,7 +366,7 @@ IterativeQuadrature <- function(Model, parm, Data, Covar=NULL,
                CPUs <- detectedCores}
           cat("\nLaplace's Demon is preparing environments for CPUs...")
           cat("\n##################################################\n")
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, Type)
           cat("\n##################################################\n")
           on.exit(stopCluster(cl))
           varlist <- unique(c(ls(), ls(envir=.GlobalEnv),
@@ -568,7 +568,7 @@ IterativeQuadrature <- function(Model, parm, Data, Covar=NULL,
                CPUs <- detectedCores}
           cat("\nLaplace's Demon is preparing environments for CPUs...")
           cat("\n##################################################\n")
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, Type)
           cat("\n##################################################\n")
           on.exit(stopCluster(cl))
           varlist <- unique(c(ls(), ls(envir=.GlobalEnv),
@@ -782,7 +782,7 @@ IterativeQuadrature <- function(Model, parm, Data, Covar=NULL,
                CPUs <- detectedCores}
           cat("\nLaplace's Demon is preparing environments for CPUs...")
           cat("\n##################################################\n")
-          cl <- makeCluster(CPUs)
+          cl <- makeCluster(CPUs, Type)
           cat("\n##################################################\n")
           on.exit(stopCluster(cl))
           varlist <- unique(c(ls(), ls(envir=.GlobalEnv),

@@ -6,7 +6,7 @@
 ###########################################################################
 
 BigData <- function(file, nrow, ncol, size=1, Method="add", CPUs=1,
-     Type="PSOCK", FUN, ...)
+     Type=.parallel_type(), FUN, ...)
      {
      FUN <- match.fun(FUN)
      N <- trunc(nrow / size)

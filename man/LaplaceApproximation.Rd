@@ -15,7 +15,7 @@
 \usage{
 LaplaceApproximation(Model, parm, Data, Interval=1.0E-6,
      Iterations=100, Method="SPG", Samples=1000, CovEst="Hessian",
-     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type="PSOCK")
+     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This required argument receives the model from a
@@ -141,8 +141,9 @@ LaplaceApproximation(Model, parm, Data, Interval=1.0E-6,
     parallel processing does not occur. Parallelization occurs only for
     sampling with \code{\link{SIR}} when \code{sir=TRUE}.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{
   The Laplace Approximation or Laplace Method is a family of asymptotic

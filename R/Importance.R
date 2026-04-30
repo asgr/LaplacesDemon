@@ -7,7 +7,7 @@
 ###########################################################################
 
 Importance <- function(object, Model, Data, Categorical=FALSE, Discrep,
-     d=0, CPUs=1, Type="PSOCK")
+     d=0, CPUs=1, Type=.parallel_type())
      {
      if(missing(object)) stop("The object argument is required.")
      if(missing(Model)) stop("The Model arguement is required.")

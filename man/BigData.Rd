@@ -8,7 +8,7 @@
   to the batch, and combining the results.
 }
 \usage{
-BigData(file, nrow, ncol, size=1, Method="add", CPUs=1, Type="PSOCK",
+BigData(file, nrow, ncol, size=1, Method="add", CPUs=1, Type=.parallel_type(),
 FUN, ...)
 }
 \arguments{
@@ -36,8 +36,10 @@ FUN, ...)
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform. The default is \code{.parallel_type()}, which selects
+    \code{"FORK"} on macOS/Linux (fastest, uses copy-on-write forking)
+    or \code{"PSOCK"} on Windows. Alternatively, \code{Type="MPI"}
+    may be specified.}
   \item{FUN}{This required argument accepts a user-specified function
     that will be performed on each batch. The first argument in the
     function must be the data.}
@@ -216,7 +218,7 @@ Model <- function(parm, Data)
      sigma.prior <- dhalfcauchy(sigma, 25, log=TRUE)
      ### Log-Likelihood
      LL <- BigData(file=filename, nrow=Data$N, ncol=Data$J+1, size=1000,
-          Method="add", CPUs=1, Type="PSOCK",
+          Method="add", CPUs=1, Type=.parallel_type(),
           FUN=function(x, beta, sigma) sum(dnorm(x[,1], tcrossprod(x[,-1],
                t(beta)), sigma, log=TRUE)), beta, sigma)
      ### Log-Posterior

@@ -12,7 +12,7 @@ LaplacesDemon.hpc <- function(Model, Data, Initial.Values, Covar=NULL,
      Iterations=10000, Status=100, Thinning=10, Algorithm="MWG",
      Specs=list(B=NULL), Debug=list(DB.chol=FALSE, DB.eigen=FALSE,
      DB.MCSE=FALSE, DB.Model=TRUE), LogFile="", Chains=2, CPUs=2,
-     Type="PSOCK", Packages=NULL, Dyn.libs=NULL)
+     Type=.parallel_type(), Packages=NULL, Dyn.libs=NULL)
      {
      detectedCores <- max(detectCores(), as.integer(Sys.getenv("NSLOTS")),
           na.rm=TRUE)

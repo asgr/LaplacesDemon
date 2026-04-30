@@ -10,7 +10,7 @@
   \eqn{\textbf{y}^{rep}}{y[rep]} is predicted given an object of
   class \code{demonoid}, the model specification, and data.
 }
-\usage{\method{predict}{pmc}(object, Model, Data, CPUs=1, Type="PSOCK", \dots)}
+\usage{\method{predict}{pmc}(object, Model, Data, CPUs=1, Type=.parallel_type(), \dots)}
 \arguments{
   \item{object}{An object of class \code{pmc} is required.}
   \item{Model}{The model specification function is required.}
@@ -21,8 +21,9 @@
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
   \item{\dots}{Additional arguments are unused.}
 }
 \details{

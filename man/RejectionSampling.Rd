@@ -6,7 +6,7 @@
   of a target density given a proposal density.
 }
 \usage{
-RejectionSampling(Model, Data, mu, S, df=Inf, logc, n=1000, CPUs=1, Type="PSOCK")
+RejectionSampling(Model, Data, mu, S, df=Inf, logc, n=1000, CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This is a model specification function. For more
@@ -28,8 +28,9 @@ RejectionSampling(Model, Data, mu, S, df=Inf, logc, n=1000, CPUs=1, Type="PSOCK"
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{
   Rejection sampling (von Neumann, 1951) is a Monte Carlo method for

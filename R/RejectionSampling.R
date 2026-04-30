@@ -6,7 +6,7 @@
 ###########################################################################
 
 RejectionSampling <- function(Model, Data, mu, S, df=Inf, logc, n=1000,
-     CPUs=1, Type="PSOCK")
+     CPUs=1, Type=.parallel_type())
      {
      ### Initial Checks
      if(missing(Model)) stop("The Model argument is required.")

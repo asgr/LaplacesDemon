@@ -21,7 +21,7 @@ LaplacesDemon.hpc(Model, Data, Initial.Values, Covar=NULL,
      Iterations=10000, Status=100, Thinning=10, Algorithm="MWG",
      Specs=list(B=NULL), Debug=list(DB.chol=FALSE, DB.eigen=FALSE,
      DB.MCSE=FALSE, DB.Model=TRUE), LogFile="", Chains=2, CPUs=2,
-     Type="PSOCK", Packages=NULL, Dyn.libs=NULL)
+     Type=.parallel_type(), Packages=NULL, Dyn.libs=NULL)
 }
 \arguments{
   \item{Model}{This required argument receives the model from a
@@ -152,7 +152,7 @@ LaplacesDemon.hpc(Model, Data, Initial.Values, Covar=NULL,
     \code{LaplacesDemon.hpc}, and indicates the number of central
     processing units (CPUs) of the computer or cluster. For example,
     when a user has a quad-core computer, \code{CPUs=4}.}
-  \item{Type}{This argument defaults to \code{"PSOCK"} and uses the
+  \item{Type}{This argument defaults to \code{.parallel_type()} (\code{"FORK"} on macOS/Linux, \code{"PSOCK"} on Windows) and uses the
     Simple Network of Workstations (SNOW) for parallelization.
     Alternatively, \code{Type="MPI"} may be specified to use Message
     Passing Interface (MPI) for parallelization.}
@@ -935,7 +935,7 @@ print(Fit)
 #Fit <- LaplacesDemon.hpc(Model, Data=MyData, Initial.Values,
 #     Covar=NULL, Iterations=1000, Status=100, Thinning=1,
 #     Algorithm="INCA", Specs=list(Adaptive=500, Periodicity=10),
-#     LogFile="MyLog", Chains=2, CPUs=2, Type="PSOCK", Packages=NULL,
+#     LogFile="MyLog", Chains=2, CPUs=2, Type=.parallel_type(), Packages=NULL,
 #     Dyn.libs=NULL)
 
 ################  Metropolis-Adjusted Langevin Algorithm  #################

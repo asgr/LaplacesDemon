@@ -5,7 +5,7 @@
 # and later provide posterior predictive checks for objects of class pmc. #
 ###########################################################################
 
-predict.pmc <- function(object, Model, Data, CPUs=1, Type="PSOCK", ...)
+predict.pmc <- function(object, Model, Data, CPUs=1, Type=.parallel_type(), ...)
      {
      ### Initial Checks
      if(missing(object)) stop("The object argument is required.")

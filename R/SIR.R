@@ -7,7 +7,7 @@
 # function in the LearnBayes package.                                     #
 ###########################################################################
 
-SIR <- function(Model, Data, mu, Sigma, n=1000, CPUs=1, Type="PSOCK") 
+SIR <- function(Model, Data, mu, Sigma, n=1000, CPUs=1, Type=.parallel_type()) 
      {
      if(missing(Model)) stop("The Model function is required.")
      if(missing(Data)) stop("The Data argument is required.")

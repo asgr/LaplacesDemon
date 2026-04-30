@@ -12,7 +12,7 @@
   function requires that posterior samples were produced with
   \code{\link{IterativeQuadrature}}.
 }
-\usage{\method{predict}{iterquad}(object, Model, Data, CPUs=1, Type="PSOCK", \dots)}
+\usage{\method{predict}{iterquad}(object, Model, Data, CPUs=1, Type=.parallel_type(), \dots)}
 \arguments{
   \item{object}{An object of class \code{iterquad} is required.}
   \item{Model}{The model specification function is required.}
@@ -23,8 +23,9 @@
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
   \item{\dots}{Additional arguments are unused.}
 }
 \details{

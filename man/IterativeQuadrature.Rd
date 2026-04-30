@@ -9,7 +9,7 @@
 \usage{
 IterativeQuadrature(Model, parm, Data, Covar=NULL, Iterations=100,
      Algorithm="CAGH", Specs=NULL, Samples=1000, sir=TRUE,
-     Stop.Tolerance=c(1e-5,1e-15), CPUs=1, Type="PSOCK")
+     Stop.Tolerance=c(1e-5,1e-15), CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This required argument receives the model from a
@@ -80,8 +80,9 @@ IterativeQuadrature(Model, parm, Data, Covar=NULL, Iterations=100,
     nodes, and sampling with \code{\link{SIR}} is parallelized when
     \code{sir=TRUE}.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{
   Quadrature is a historical term in mathematics that means determining

@@ -7,7 +7,7 @@
 
 VariationalBayes <- function(Model, parm, Data, Covar=NULL,
      Interval=1.0E-6, Iterations=1000, Method="Salimans2", Samples=1000,
-     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type="PSOCK")
+     sir=TRUE, Stop.Tolerance=1.0E-5, CPUs=1, Type=.parallel_type())
      {
      ##########################  Initial Checks  ##########################
      time1 <- proc.time()

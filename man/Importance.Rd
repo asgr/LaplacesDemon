@@ -17,7 +17,7 @@
 }
 \usage{
 Importance(object, Model, Data, Categorical=FALSE, Discrep, d=0, CPUs=1,
-  Type="PSOCK")
+  Type=.parallel_type())
 }
 \arguments{
   \item{object}{An object of class \code{demonoid}, \code{iterquad},
@@ -43,8 +43,9 @@ Importance(object, Model, Data, Categorical=FALSE, Discrep, d=0, CPUs=1,
     computer cluster. This argument defaults to \code{CPUs=1}, in which
     parallel processing does not occur.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{Variable importance is defined here as the impact of each
   variable (predictor, or column vector) in design matrix

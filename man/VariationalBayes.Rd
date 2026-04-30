@@ -12,7 +12,7 @@
 \usage{
 VariationalBayes(Model, parm, Data, Covar=NULL, Interval=1.0E-6,
      Iterations=1000, Method="Salimans2", Samples=1000, sir=TRUE,
-     Stop.Tolerance=1.0E-5, CPUs=1, Type="PSOCK")
+     Stop.Tolerance=1.0E-5, CPUs=1, Type=.parallel_type())
 }
 \arguments{
   \item{Model}{This required argument receives the model from a
@@ -102,8 +102,9 @@ VariationalBayes(Model, parm, Data, Covar=NULL, Interval=1.0E-6,
     parallel processing does not occur. Parallelization occurs only for
     sampling with \code{\link{SIR}} when \code{sir=TRUE}.}
   \item{Type}{This argument specifies the type of parallel processing to
-    perform, accepting either \code{Type="PSOCK"} or
-    \code{Type="MPI"}.}
+    perform, accepting \code{.parallel_type()} (default: \code{"FORK"} on
+    macOS/Linux, \code{"PSOCK"} on Windows), \code{"PSOCK"}, \code{"MPI"},
+    or \code{"FORK"}.}
 }
 \details{
   Variational Bayes (VB) is a family of numerical approximation

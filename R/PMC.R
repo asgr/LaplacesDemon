@@ -6,7 +6,7 @@
 ###########################################################################
 
 PMC <- function(Model, Data, Initial.Values, Covar=NULL, Iterations=10,
-     Thinning=1, alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type="PSOCK")
+     Thinning=1, alpha=NULL, M=1, N=1000, nu=9, CPUs=1, Type=.parallel_type())
      {
      cat("\nPMC was called on ", date(), "\n", sep="")
      time1 <- proc.time()
