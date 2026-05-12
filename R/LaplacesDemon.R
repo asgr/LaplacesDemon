@@ -4838,8 +4838,8 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
      Periodicity <- Specs[["Periodicity"]]
      post <- matrix(Mo0[["parm"]], Iterations, LIV, byrow=TRUE)
      Iden.Mat <- diag(LIV)
-     con <- if(exists("con")) get("con") else NULL
-     Chains <- if(exists("Chains")) get("Chains") else 1L
+     .con <- get0("con", ifnotfound=NULL, inherits=TRUE)
+     con <- if(inherits(.con, "sockconn") && isOpen(.con)) .con else NULL
      DiagCovar <- matrix(0, floor(Iterations/Periodicity), LIV)
      ### Store all posteriors
      INCA_iter <- 1
@@ -4927,9 +4927,19 @@ LaplacesDemon <- function(Model, Data, Initial.Values, Covar=NULL,
                     tmpAlpha)
                if(!is.null(con)) {
                     ### Ask for last posteriors to hpc_server
-                    tmp <- unserialize(con)
+                    tmp <- tryCatch(unserialize(con), error=function(e) {
+                         cat("\nWARNING: INCA cross-chain unserialize failed:",
+                              conditionMessage(e), "\n",
+                              file=LogFile, append=TRUE)
+                         NULL})
                     ### Send new posteriors matrix to hpc_server
-                    serialize(select_post, con)
+                    if(!is.null(tmp))
+                         tryCatch(serialize(select_post, con),
+                              error=function(e) {
+                                   cat("\nWARNING: INCA cross-chain serialize failed:",
+                                        conditionMessage(e), "\n",
+                                        file=LogFile, append=TRUE)
+                                   invisible(NULL)})
                } else tmp <- NULL
                if(is.matrix(tmp) && INCA_first == FALSE) {
                     for (i in 1:nrow(select_post)) {
